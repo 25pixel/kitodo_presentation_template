@@ -2,10 +2,10 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Kitodo Presentation Package',
-	'description' => '',
+	'description' => 'Custom template for Kitodo.Presentation, developed at the Sorbian Institute (Serbski Institut)',
 	'category' => 'distribution',
-	'author' => 'Christopher Timm',
-	'author_email' => 'timm@effective-webwork.de',
+	'author' => 'Tobias Urland-Wocko',
+	'author_email' => 'tobias.urland-wocko@serbski-institut.de',
 	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => '0',
