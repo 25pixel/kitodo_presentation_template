@@ -1,0 +1,17 @@
+{
+  "name": "serbski-institut/kitodo-presentation-template",
+  "type": "typo3-cms-extension",
+  "description": "Custom template for Kitodo.Presentation, developed at the Sorbian Institute (Serbski Institut)",
+  "homepage": "https://www.serbski-institut.de/",
+  "license": "GPL-3.0-or-later",
+  "keywords": ["TYPO3 CMS", "Kitodo", "Template", "Presentation", "Serbski Institut"],
+  "version": "1.0.0",
+  "require": {
+    "typo3/cms-core": "^10.4 || ^11.5"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "kitodo_presentation_template"
+    }
+  }
+}

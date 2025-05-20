@@ -1,0 +1,32 @@
+<header>
+	<section class="portal-header">
+		<div class="header-wrapper">
+			<article id="portal-logo">
+				<a href="#" id="kitodo-logo">
+					<img src="{f:uri.resource(path: 'Images/logo.png')}" alt="">
+				</a>
+			</article>
+		</div>
+
+		<article class="meta-navigation">
+
+			<v:content.render column="15" />
+
+			<!--<a href="" title="favorites">-->
+				<!--<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images//icon-star.svg" alt="favorites">-->
+				<!--<span class="meta-batchcount">44</span>-->
+			<!--</a>-->
+		</article>
+
+	</section>
+
+	<section class="portal-main-search">
+		<div class="header-wrapper">
+
+			<v:content.render column="0" />
+
+			<v:page.breadCrumb class="breadcrumb" tagName="article" tagNameChildren="span" linkCurrent="false"/>
+		</div>
+	</section>
+
+</header>
