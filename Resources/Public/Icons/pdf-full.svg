@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
+  <g transform="matrix(1.00873, 0, 0, 1.00873, -0.987381, -0.089035)" style="">
+    <path d="M 17.25 0.758 L 9.806 0.758 C 8.823 0.758 8.101 1.539 8.101 2.616 L 15.007 2.616 L 19.936 7.607 L 20.011 19.488 L 22.288 19.488 L 22.23 5.727 L 17.25 0.758 Z" style="fill: none; fill-rule: nonzero; stroke: rgb(0, 106, 178); stroke-width: 1.23px;"/>
+    <path d="M 14.969 2.62 L 7.525 2.62 C 6.542 2.62 5.743 3.401 5.743 4.478 L 12.726 4.51 L 17.681 9.452 L 17.726 21.335 L 20.007 21.35 L 19.949 7.589 L 14.969 2.62 Z" style="fill: none; fill-rule: nonzero; stroke: rgb(0, 106, 178); stroke-width: 1.23px;"/>
+    <g style="" transform="matrix(0.828833, 0, 0, 0.827277, 0.185587, 3.84675)">
+      <path d="M 15.085 0.767 L 6.104 0.767 C 4.917 0.767 3.953 1.824 3.953 3.125 L 3.953 23.407 L 21.163 23.407 L 21.093 6.773 L 15.085 0.767 Z" style="fill: none; fill-rule: nonzero; stroke: rgb(0, 106, 178); stroke-width: 1.48541px;"/>
+      <text style="fill: rgb(0, 106, 178); font-family: Arial, sans-serif; font-size: 7px; font-weight: 700; white-space: pre;" x="5.558" y="18.455">PDF</text>
+      <path d="M 14.367 3.744 L 18.001 7.378 L 14.367 7.378 L 14.367 3.744 Z" style="fill: none; stroke: rgb(0, 106, 178); stroke-width: 1.21055px;"/>
+    </g>
+  </g>
+</svg>

@@ -6,17 +6,17 @@ $('#submitBasketForm').text("merken");
 $('#kitodo-logo').attr("href", "index.php?id=1");
 
 function listviewCalendarSwitch() {
-    $('.tx-dlf-listview li .tx-dlf-type span').each(function() {
-        if ($(this).text().trim().toLowerCase() == 'zeitung' || $(this).text().trim().toLowerCase() == 'jahr') {
-            var link = $(this).parent().parent().find("h2 a").attr('href');
-            link = link.split("?");
-            var params = link[1];
-            link = link[0];
-            link = link.replace('detailseite', 'kalender');
-            link = link.replace('/startseite/trefferliste', '');
-            $(this).parent().parent().find("h2 a").attr('href', link + '?' + params);
-        }
-    });
+//    $('.tx-dlf-listview li .tx-dlf-type span').each(function() {
+//        if ($(this).text().trim().toLowerCase() == 'zeitung' || $(this).text().trim().toLowerCase() == 'jahr') {
+//            var link = $(this).parent().parent().find("h2 a").attr('href');
+//            link = link.split("?");
+//            var params = link[1];
+//            link = link[0];
+//            link = link.replace('detailseite', 'kalender');
+//            link = link.replace('/startseite/trefferliste', '');
+//            $(this).parent().parent().find("h2 a").attr('href', link + '?' + params);
+//        }
+//    });
 }
 
 $( document ).ready(function() {
@@ -25,15 +25,15 @@ $( document ).ready(function() {
     calendarSelectBox();
     listviewCalendarSwitch();
     calendarTitleOnly();
-    pageGridButton();
+    /* pageGridButton(); */
 });
 
-function pageGridButton() {
+/* function pageGridButton() {
     $('#pagegrid').on('click', function (evt) {
         evt.preventDefault();
         $('.fullsize-pagegrid').toggle();
     });
-}
+} */
 
 function calendarTitleOnly() {
     if ($('.tx-dlf-calendar').length || $('.tx-dlf-calendar-years').length) {
@@ -68,72 +68,99 @@ function calendarSwitchViews() {
 
 function calendarSelectBox() {
 
-    if (isTouchDevice()) {
-        $(document).mouseup(function(e)
-        {
-            var container = $("div.issues div.openSelectBox");
+    // Hilfsfunktion zum Erkennen von Touch-Geräten
+    function isTouchDevice() {
+        return (
+            ('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0) ||
+            (navigator.msMaxTouchPoints > 0)
+        );
+    }
 
-            // if the target of the click isn't the container nor a descendant of the container
-            if (!container.is(e.target) && container.has(e.target).length === 0)
-            {
-                container.hide();
-                container.removeClass('openSelectBox');
+    if (isTouchDevice()) {
+        // ================
+        // MOBILE / TABLET
+        // ================
+
+        console.log("Touch Device Code");
+
+        // 1) Gehe alle dayLinkList-DIVs durch
+        $("div.issues div.dayLinkList").each(function () {
+            const interactiveElement = $(this).closest('div.issues');
+            // Hat das dayLinkList-DIV mehrere Links?
+            if ($(this).children('a').length > 1) {
+                // Mehrere Links => Klick/Tap öffnet die Auswahl
+                interactiveElement.on('click', function (event) {
+                    event.stopPropagation(); // Verhindert, dass das Dokument-Klick-Event direkt schließt
+                    // Zuerst alle offenen Boxen schließen, damit nicht mehrere offen bleiben
+                    $("div.issues div.openSelectBox").hide().removeClass("openSelectBox");
+
+                    // Dann diese Box öffnen
+                    $(this).children("div").addClass('openSelectBox').show();
+                });
+            } else {
+                // Nur 1 Link => direkter Seitenwechsel
+                interactiveElement.on('click', function (event) {
+                    const url = $(this).find('div a').attr('href');
+                    if (url) {
+                        window.location.href = url;
+                    }
+                });
             }
         });
 
-        // $("div.issues div ul").each(function () {
-        //     var interactiveElement = $(this).closest('div.issues');
-        //     if ($(this).children('li').length > 1) {
-        //         interactiveElement.on('click', function (event) {
-        //             $("div.issues div.openSelectBox").hide();
-        //
-        //             $(this).children("div").addClass('openSelectBox');
-        //             $(this).children("div").show();
-        //         });
-        //     } else {
-        //         // dont show select box
-        //         // set direct link instead
-        //         interactiveElement.on('click', function (event) {
-        //             window.location.href = $(this).find('div ul li a').attr('href');
-        //         });
-        //     }
-        // });
+        // 2) Klick/Tap außerhalb einer offenen Box => Box schließen
+        $(document).on('click touchend', function (e) {
+            // Finde die aktuell offene Box
+            const container = $("div.issues div.openSelectBox");
+
+            // Wenn der Klick NICHT auf die Box selbst oder ihre Kinder geht
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide().removeClass('openSelectBox');
+            }
+        });
 
     } else {
+        // ================
+        // DESKTOP
+        // ================
+
+        console.log("Desktop Code");
 
         $("div.issues div.dayLinkList").each(function () {
-            var interactiveElement = $(this).closest('div.issues');
+            const interactiveElement = $(this).closest('div.issues');
+
+            // Bei mehr als einem Link Box per Hover zeigen
             if ($(this).children('a').length > 1) {
-                // show select box
                 interactiveElement.on('mouseenter', function (event) {
-                    // $("div.issues div.dayLinkList").hide();
+                    // Box öffnen
+                    $(this).children("div").addClass('openSelectBox').show();
 
-                    $(this).children("div").addClass('openSelectBox');
-                    $(this).children("div").show();
-
+                    // Wieder schließen, sobald Maus weg ist (via Timer)
                     setTimeout(function hoverTimeoutCheck() {
-                        if ($('div.issues div.openSelectBox:hover').length == 0 && $('div.issues:hover').length == 0) {
-                            $("div.issues div.openSelectBox").hide();
+                        // Wenn keine Box mehr "hovered" ist und auch kein issues-DIV, dann schließen
+                        if ($('div.issues div.openSelectBox:hover').length === 0 &&
+                            $('div.issues:hover').length === 0) {
+                            $("div.issues div.openSelectBox").hide().removeClass('openSelectBox');
                         } else {
+                            // Sonst 1 Sekunde warten und nochmal checken
                             setTimeout(hoverTimeoutCheck, 1000);
                         }
                     }, 1000);
                 });
             } else {
-                // set direct link
+                // Nur 1 Link => Klick führt direkt weiter
                 interactiveElement.on('click', function (event) {
-                    window.location.href = $(this).find('div a').attr('href');
+                    const url = $(this).find('div a').attr('href');
+                    if (url) {
+                        window.location.href = url;
+                    }
                 });
             }
         });
     }
 }
 
-function isTouchDevice() {
-    return (('ontouchstart' in window) ||
-        (navigator.maxTouchPoints > 0) ||
-        (navigator.msMaxTouchPoints > 0));
-}
 
 // listview
 
@@ -232,59 +259,59 @@ $(".tx-dlf-navigation-rotate-left a").click(function () {
 
 $('.tx-dlf-navigation-double a, .tx-dlf-navigation-double span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-doublepage.svg" alt="Show double pages">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-doublepage.svg" alt="Show double pages">');
 
 $('.tx-dlf-navigation-double-plus a, .tx-dlf-navigation-double-plus span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-verso.svg" alt="Adjust recto/verso">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-verso.svg" alt="Adjust recto/verso">');
 
 $('.tx-dlf-navigation-zoom-in a, .tx-dlf-navigation-zoom-in span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-zoomin.svg" alt="Zoom In">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-zoomin.svg" alt="Zoom In">');
 
 $('.tx-dlf-navigation-zoom-out a, .tx-dlf-navigation-zoom-out span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-zoomout.svg" alt="Zoom Out">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-zoomout.svg" alt="Zoom Out">');
 
 $('.tx-dlf-navigation-rotate-left a, .tx-dlf-navigation-rotate-left span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-rotateleft.svg" alt="Rotate Left">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-rotateleft.svg" alt="Rotate Left">');
 
 $('.tx-dlf-navigation-rotate-right a, .tx-dlf-navigation-rotate-right span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-rotateright.svg" alt="Rotate Right">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-rotateright.svg" alt="Rotate Right">');
 
 $('.tx-dlf-navigation-first a, .tx-dlf-navigation-first span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-skipleft.svg" alt="First Page">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-skipleft.svg" alt="First Page">');
 
 $('.tx-dlf-navigation-prev a, .tx-dlf-navigation-prev span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-doubleleft.svg" alt="Back 5 Pages">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-doubleleft.svg" alt="Back 5 Pages">');
 
 $('.tx-dlf-navigation-back a, .tx-dlf-navigation-back span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-singleleft.svg" alt="Previous Page">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-singleleft.svg" alt="Previous Page">');
 
 $('.tx-dlf-navigation-next a, .tx-dlf-navigation-next span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-singleright.svg" alt="Next Page">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-singleright.svg" alt="Next Page">');
 
 $('.tx-dlf-navigation-fwd a, .tx-dlf-navigation-fwd span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-doubleright.svg" alt="Forward 5 Pages">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-doubleright.svg" alt="Forward 5 Pages">');
 
 $('.tx-dlf-navigation-last a, .tx-dlf-navigation-last span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-skipright.svg" alt="Last Page">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-skipright.svg" alt="Last Page">');
 
 $('.tx-dlf-navigation-listview a, .tx-dlf-navigation-listview span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-skipright.svg" alt="Zurück zur Liste">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-skipright.svg" alt="Zurück zur Liste">');
 
 $('.tx-dlf-navigation-listview a, .tx-dlf-navigation-listview span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-skipright.svg" alt="Last Page">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-skipright.svg" alt="Last Page">');
 
 
 if ($('.tx-dlf-navigation-edit').length) {
@@ -310,15 +337,15 @@ if ($('.tx-dlf-navigation-magnifier').length) {
 
 $('.tx-dlf-navigation-edit a, .tx-dlf-navigation-edit span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-selection.svg" alt="Ausschnitt auswählen">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-selection.svg" alt="Ausschnitt auswählen">');
 
 $('.tx-dlf-navigation-editRemove a, .tx-dlf-navigation-editRemove span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-selection-x.svg" alt="Ausschnitt entfernen">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-selection-x.svg" alt="Ausschnitt entfernen">');
 
 $('.tx-dlf-navigation-magnifier a, .tx-dlf-navigation-magnifier span')
     .text("")
-    .append('<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images/icon-magnifying.svg" alt="Lupe">');
+    .append('<img src="../../typo3conf/ext/kitodo_presentation_template/Resources/Public/Images/icon-magnifying.svg" alt="Lupe">');
 
 
 $('div.tx-dlf-navigation-edit').hide();
@@ -332,7 +359,8 @@ $(document).ready(function() {
     shortenDescription();
     addLicenseIcon();
     combineMetadataWithLinks();
-    generateFullPdfLink();
+    createEventLinks();
+    console.log("kitodo_presentation_template: main.js");
 });
 
 function shortenDescription() {
@@ -446,11 +474,35 @@ function combineMetadataWithLinks() {
     });
 }
 
-function generateFullPdfLink() {
-    var originalHref = $('.tx-dlf-tools-pdf-page a').attr('href');
+function createEventLinks() {
+    console.log("kitodo_presentation_template: createEventLinks()");
 
-    if (originalHref && originalHref.includes("/images/pdf/")) {
-        var newHref = originalHref.replace(/\/images\/pdf\/[^/]+\.pdf$/, "/images/full.pdf");
-        $('#fullPdfDownload').attr('href', newHref);
-    }
+    var $years = $('dd#monument-event');
+    var $eventTypes = $('dd.monument-event-eventType');
+    var $eventLinks = $('dd.monument-event-eventLink');
+
+    if ($years.length === $eventTypes.length) {
+        $years.each(function (index) {
+            var year = $(this).text().trim();
+            var eventType = $eventTypes.eq(index).text().trim();
+            var eventLink = $eventLinks.eq(index).text().trim();
+
+            $(this).html("<a href='" + eventLink + "'>" + eventType + "</a>: " + year + "<br>");
+        });
+    }    
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Überprüfen, ob der Link vorhanden ist
+    const link = document.querySelector("a[href='http://www.digitalizat.de:6920/id/91']");
+    const videoEmbed = document.querySelector(".video-embed");
+    const dddEmbed = document.querySelector(".ddd-container");
+    
+    if (link && videoEmbed) {
+        videoEmbed.style.display = "block";
+        dddEmbed.style.display = "block";
+    } else if (videoEmbed) {
+        videoEmbed.style.display = "none";
+        dddEmbed.style.display = "none";
+    }
+});

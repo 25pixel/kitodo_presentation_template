@@ -2,7 +2,7 @@
      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
      xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
-     xmlns:pp="http://typo3.org/ns/SerbskiInstitut/KitodoPresentationTemplate/ViewHelpers">
+     xmlns:pp="http://typo3.org/ns/Kitodo/PresentationPackage/ViewHelpers">
 
     <f:layout name="Default" />
 
@@ -14,9 +14,12 @@
         <flux:grid>
             <!-- Edit this grid to change the "backend layout" structure -->
             <flux:grid.row>
-                <flux:grid.column colPos="0" name="Titel" label="Titel" />
+                <flux:grid.column colPos="0" colspan="1" name="Header" label="Header" />
+                <flux:grid.column colPos="15" colspan="1" name="Basket" label="Warenkorb" />
+            </flux:grid.row>             
+            <flux:grid.row>
+                <flux:grid.column colPos="2" name="Titel" label="Titel" />
                 <flux:grid.column colPos="8" name="Navigation" label="Pageview Navigation" />
-                <flux:grid.column colPos="15" name="Basket" label="Basket" />
             </flux:grid.row>
             <flux:grid.row>
                 <flux:grid.column colPos="3" name="Docnavigation" label="Dokument Navigation" />
@@ -32,58 +35,14 @@
     </f:section>
 
     <f:section name="Main">
-        <header>
-            <section class="portal-header">
-                <div class="header-wrapper">
-                    <article id="portal-logo">
-                    </article>
-                </div>
 
-                <article class="meta-navigation">
-
-                    <v:content.render column="15" />
-
-                    <!--<a href="" title="favorites">-->
-                    <!--<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images//icon-star.svg" alt="favorites">-->
-                    <!--<span class="meta-batchcount">44</span>-->
-                    <!--</a>-->
-                </article>
-
-            </section>
-
-            <section class="portal-main-search">
-                <div class="header-wrapper">
-
-                    <v:content.render column="0" />
-
-                    <article class="breadcrumb breadcrumb-detailview">
-                        <span>
-                            <a href="/">Startseite</a>
-                        </span>
-                        <span id="backtolistview">
-                            <a href="/">Trefferliste</a>
-                        </span>
-                        <span>
-                            Detail
-                        </span>
-                    </article>
-                </div>
-            </section>
-
-        </header>
-
-        <header>
-            <section class="portal-meta">
-                <article class="breadcrumb">
-                    <f:comment>
-                        <v:page.breadCrumb class="breadcrumb" tagName="article" tagNameChildren="span"/>
-                    </f:comment>
-                </article>
-            </section>
-        </header>
+        
 
         <main class="clear" id="detail-view">
             <aside>
+
+                <f:render partial="Header" arguments="{_all}"/>
+
                 <section>
                     <div class="detail-aside-nav">
                         <v:content.render column="3" />
@@ -112,20 +71,25 @@
 
                         <div class="detail-view-nav">
                             <v:content.render column="8" />
-                        </div>
+                        </div>                        
                     </article>
                     <v:content.render column="1" />
+                    <div class="fullsize-pagegrid">
+                        <v:content.render column="6" />
+                    </div> 
                 </div>
-            </section>
+            </section>          
         </main>
 
-        <div class="fullsize-pagegrid">
-            <v:content.render column="6" />
-        </div>
+        <f:render partial="Footer"/>
 
-        <f:comment>
-            <f:render partial="Footer"/>
-        </f:comment>
     </f:section>
 
 </div>
+<!--
+    This template is used for the presentation detail view.
+    It is a combination of the pageview and the detail view.
+    The template is used for the presentation detail view in the frontend.
+    The template is used for the presentation detail view in the backend.
+    The template is used for the presentation detail view in the backend.
+    The template is used for the presentation detail view in the backend.

@@ -14,15 +14,15 @@
 
 <ul class="tx-dlf-toolbox">
 
-    <li class="tx-button">
+<!--     <li class="tx-button">
         <a class="fa fa-th fa-lg" id="pagegrid" href="#pagegrid">
         </a>
-    </li>
+    </li> -->
 
 
     <f:if condition="{renderAnnotationTool}">
         <f:then>
-            <li class="tx-button">
+            <li>
                 <span class="tx-dlf-tools-annotations">
                     <f:if condition="{annotationTool}">
                         <f:then>
@@ -43,7 +43,7 @@
 
     <f:if condition="{renderImageManipulationTool}">
         <f:then>
-            <li class="tx-button">
+            <li>
                 <span class="tx-dlf-tools-imagetools" id="tx-dlf-tools-imagetools"
                         data-dic="imagemanipulation-on:{f:translate(key: 'tools.imagemanipulation.on')};imagemanipulation-off:{f:translate(key: 'tools.imagemanipulation.off')};reset:{f:translate(key: 'tools.imagemanipulation.reset')};saturation:{f:translate(key: 'tools.imagemanipulation.saturation')};hue:{f:translate(key: 'tools.imagemanipulation.hue')};contrast:{f:translate(key: 'tools.imagemanipulation.contrast')};brightness:{f:translate(key: 'tools.imagemanipulation.brightness')};invert:{f:translate(key: 'tools.imagemanipulation.invert')};parentContainer:{parentContainer}"
                         title="{f:translate(key: 'tools.imagemanipulation.no-support')}">
@@ -54,26 +54,26 @@
 
     <f:if condition="{renderImageDownloadTool} && {imageDownload}">
         <f:then>
-            <li class="tx-button">
+            <li>
                 <span class="tx-dlf-tools-imagedownload">
                     <f:if condition="{double} === 0">
                         <f:then>
                             <f:link.external uri="{imageDownload.0.url}">
                                 <f:comment><f:translate key="downloadSinglePage" /> {imageDownload.0.mimetypeLabel}</f:comment>
-                                <img src="/typo3conf/ext/presentation_package/Resources/Public/Images/filetype-jpg.svg" alt="Image Download">
+                                <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/jpg-single.svg" alt="Image Download">
                             </f:link.external>
                         </f:then>
                         <f:else>
                             <f:link.external uri="{imageDownload.0.url}">
                                 <f:comment><f:translate key="downloadLeftPage" /> {imageDownload.0.mimetypeLabel}</f:comment>
-                                <img src="/typo3conf/ext/presentation_package/Resources/Public/Images/filetype-jpg.svg" alt="Image Download">
+                                <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/jpg-single.svg" alt="Image Download">
                             </f:link.external>
                             <f:if condition="{imageDownload.1}">
                                 <f:then>
                                     <span class="tx-dlf-tools-imagedownload">
                                         <f:link.external uri="{imageDownload.1.url}">
                                             <f:comment><f:translate key="downloadRightPage" /> {imageDownload.1.mimetypeLabel}</f:comment>
-                                            <img src="/typo3conf/ext/presentation_package/Resources/Public/Images/filetype-jpg.svg" alt="Image Download">
+                                            <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/jpg-single.svg" alt="Image Download">
                                         </f:link.external>
                                     </span>
                                 </f:then>
@@ -87,93 +87,91 @@
 
     <f:if condition="{renderFulltextTool}">
         <f:then>
-            <li>
-                <span class="tx-dlf-tools-fulltext">
-                    <f:if condition="{fulltext}">
-                        <f:then>
+            <f:if condition="{fulltext}">
+                <f:then>
+                    <li>
+                        <span class="tx-dlf-tools-fulltext">
                             <a class="select switchoff" id="tx-dlf-tools-fulltext" title=""
                                data-dic="fulltext:{f:translate(key: 'tools.fulltext')};fulltext-loading:{f:translate(key: 'tools.fulltext.loading')};fulltext-on:;fulltext-off:;activate-full-text-initially:{activateFullTextInitially};full-text-scroll-element:#tx-dlf-fulltextselection;search-hl-parameters:{settings.searchHlParameters}">
                                 &nbsp;
                             </a>
-                        </f:then>
-                        <f:else>
-                            <span class="no-fulltext">
-                                <f:translate key="tools.fulltext.not-available"/>
-                            </span>
-                        </f:else>
-                    </f:if>
-                </span>
-            </li>
+                        </span>
+                    </li>
+                </f:then>
+            </f:if>                    
         </f:then>
     </f:if>
-
     <f:if condition="{renderFulltextDownloadTool}">
         <f:then>
-            <li>
-                <span class="tx-dlf-tools-fulltextdownload">
-                    <f:if condition="{fulltextDownload}">
-                        <f:then>
+            <f:if condition="{fulltextDownload}">
+                <f:then>
+                    <li>
+                        <span class="tx-dlf-tools-fulltextdownload">
                             <a href="#" id="tx-dlf-tools-fulltextdownload"
-                               title="{f:translate(key: 'tools.fulltextdownload.download-current-page')}">
-                                <f:translate key="tools.fulltextdownload.download-current-page"/>
+                                title="{f:translate(key: 'tools.fulltextdownload.download-current-page')}">
+                                <!-- <f:translate key="tools.fulltextdownload.download-current-page"/> -->
+                                <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/txt-single.svg" alt="Image Download">
                             </a>
-                        </f:then>
-                        <f:else>
-                            <span class="no-fulltext">
-                                <f:translate key="tools.fulltext.not-available"/>
-                            </span>
-                        </f:else>
-                    </f:if>
-                </span>
-            </li>
+                        </span>
+                    </li>
+                </f:then>
+            </f:if>            
         </f:then>
     </f:if>
-
     <f:if condition="{renderPdfDownloadTool}">
         <f:then>
-            <li class="tx-button">
-                <span class="tx-dlf-tools-pdf-page">
-                    <f:if condition="{double} === 0">
-                        <f:then>
-                            <f:link.external uri="{pageLinks.0}" class="fa fa-file-pdf fa-lg">
-                                <f:comment><f:translate key="downloadSinglePage" /> (PDF)</f:comment>
-                            </f:link.external>
-                        </f:then>
-                        <f:else>
-                            <f:link.external uri="{pageLinks.0}" class="fa fa-file-pdf fa-lg">
-                                <f:comment><f:translate key="downloadLeftPage" /> (PDF)</f:comment>
-                            </f:link.external>
-                            <f:if condition="{pageLinks.1}">
-                                <f:then>
-                                    <f:link.external uri="{pageLinks.1}" class="fa fa-file-pdf fa-lg">
-                                        <f:comment><f:translate key="downloadRightPage" /> (PDF)</f:comment>
-                                    </f:link.external>
-                                </f:then>
-                            </f:if>
-                        </f:else>
-                    </f:if>
-                </span>
-                <f:comment>
-                <span class="tx-dlf-tools-pdf-work">
-                    <f:if condition="{workLink}">
-                        <f:then>
-                            <f:link.external uri="{workLink}" class="fa fa-images fa-lg">
-                                <f:comment><f:translate key="downloadWork"/> (PDF)</f:comment>
-                            </f:link.external>
-                        </f:then>
-                    </f:if>
-                </span>
-                </f:comment>
-            </li>
-            <li class="tx-button">
-                <a id="fullPdfDownload" href="#"><img src="/typo3conf/ext/presentation_package/Resources/Public/Images/icon-pdf-white.svg" alt="PDF Download"></a>
-            </li>
+            <f:if condition="{pageLinks}">
+                <li>
+                    <span class="tx-dlf-tools-pdf-page">
+                        <f:if condition="{double} === 0">
+                            <f:then>
+                                <f:link.external uri="{pageLinks.0}">
+                                    <!-- <f:translate key="downloadSinglePage" /> (PDF) -->
+                                    <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/pdf-single.svg" alt="Single Page PDF Download">
+                                </f:link.external>
+                            </f:then>
+                            <f:else>
+                                <f:link.external uri="{pageLinks.0}">
+                                    <!-- <f:translate key="downloadLeftPage" /> (PDF) -->
+                                    <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/pdf-single.svg" alt="Single Page PDF Download">
+                                </f:link.external>
+                                <f:if condition="{pageLinks.1}">
+                                    <f:then>
+                                        <f:link.external uri="{pageLinks.1}">
+                                            <!-- <f:translate key="downloadRightPage" /> (PDF) -->
+                                            <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/pdf-single.svg" alt="Single Page PDF Download">
+                                        </f:link.external>
+                                    </f:then>
+                                </f:if>
+                            </f:else>
+                        </f:if>
+                    </span>
+                    <f:comment>
+                        <span class="tx-dlf-tools-pdf-work">
+                        <f:if condition="{workLink}">
+                            <f:then>
+                                <f:link.external uri="{workLink}">
+                                    <f:translate key="downloadWork"/> (PDF)
+                                </f:link.external>
+                            </f:then>
+                        </f:if>
+                        </span>
+                    </f:comment>
+                </li>
+                <li>
+                    <span class="tx-dlf-tools-pdf-page">
+                        <a id="fullPdfDownload" href="#">                    
+                            <img src="/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/pdf-full.svg" alt="Full Page PDF Download">
+                        </a>
+                    </span>
+                </li>
+            </f:if>
         </f:then>
     </f:if>
 
     <f:if condition="{renderSearchInDocumentTool} && {searchInDocument}">
         <f:then>
-            <li class="tx-button">
+            <li>
                 <f:if condition="{settings.searchUrl}">
                     <f:then>
                         <f:variable name="actionUrl" value="{settings.searchUrl}" />

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
+  <g style="" transform="matrix(0.992218, 0, 0, 0.990356, -0.460275, 0.029567)">
+    <path d="M 15.085 0.767 L 6.104 0.767 C 4.917 0.767 3.953 1.824 3.953 3.125 L 3.953 23.407 L 21.163 23.407 L 21.093 6.773 L 15.085 0.767 Z" style="fill: none; fill-rule: nonzero; stroke: rgb(0, 106, 178); stroke-width: 1.48541px;"/>
+    <text style="fill: rgb(0, 106, 178); font-family: Arial, sans-serif; font-size: 6.5px; font-weight: 700; line-height: 9.69348px; white-space: pre;" x="5.336" y="18.455">OCR</text>
+    <path d="M 14.367 3.744 L 18.001 7.378 L 14.367 7.378 L 14.367 3.744 Z" style="fill: none; stroke: rgb(0, 106, 178); stroke-width: 1.21055px;"/>
+  </g>
+</svg>

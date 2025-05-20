@@ -2,7 +2,7 @@
      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
      xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
-     xmlns:pp="http://typo3.org/ns/SerbskiInstitut/KitodoPresentationTemplate/ViewHelpers">
+     xmlns:pp="http://typo3.org/ns/Kitodo/PresentationPackage/ViewHelpers">
 
     <f:layout name="Default" />
 
@@ -24,46 +24,7 @@
     </f:section>
 
     <f:section name="Main">
-        <header>
-            <section class="portal-header">
-                <div class="header-wrapper">
-                    <article id="portal-logo">
-                        <a href="/" id="kitodo-logo">
-
-                        </a>
-                    </article>
-                </div>
-
-                <article class="meta-navigation">
-
-                    <v:content.render column="15" />
-
-                    <!--<a href="" title="favorites">-->
-                    <!--<img src="../../typo3conf/ext/presentation_package/Resources/Public/Images//icon-star.svg" alt="favorites">-->
-                    <!--<span class="meta-batchcount">44</span>-->
-                    <!--</a>-->
-                </article>
-
-            </section>
-
-            <section class="portal-main-search">
-                <div class="header-wrapper header-background">
-
-                    <div class="portal-welcome-headline">
-                        <h1>Willkommen</h1>
-                        <h2>Wonach suchen Sie?</h2>
-                    </div>
-
-                    <v:content.render column="0" />
-
-                    <div class="portal-welcome-intro">
-                        <p>Beschreibung</p>
-                    </div>
-
-                </div>
-            </section>
-
-        </header>
+        <f:render partial="Header" arguments="{_all}"/>
 
         <main class="one_column">
             <section>

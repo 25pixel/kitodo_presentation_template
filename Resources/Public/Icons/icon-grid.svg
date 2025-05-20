@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="0px" height="28.3px" viewBox="0 0 28.348 28.348" enable-background="new 0 0 28.348 28.348">
+  <g transform="matrix(1, 0, 0, 1, 0.6075, 0.4105)">
+    <rect x="0.224" y="0.302" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect x="9.653" y="0.302" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect x="19.082" y="0.302" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect x="0.108" y="9.785" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect x="9.595" y="9.785" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect x="19.082" y="9.785" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect y="19.268" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);" x="0.094"/>
+    <rect x="9.588" y="19.268" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+    <rect x="19.082" y="19.268" width="7.957" height="7.957" rx="1" ry="1" style="fill: rgb(255, 255, 255);"/>
+  </g>
+</svg>
