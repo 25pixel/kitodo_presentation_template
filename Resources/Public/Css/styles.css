@@ -1162,19 +1162,23 @@ detail-view
 .detail-view-itemdetails dt,
 .detail-view-itemdetails label dt {
     display: inline;
-    padding-right: 5px;
+    padding: 10px 5px 0 0;
     font-weight: 300;
 }
 
 .detail-view-itemdetails dd,
 .detail-view-itemdetails label dd {
     font-weight: 700;
-    display: inline;
+    display: block;
 }
 
-.detail-view-itemdetails .dropdown-menu ul dt,
+.detail-view-itemdetails .dropdown-menu ul dt {
+    display: block;
+    padding: 10px 0 0 15px;
+}
+
 .detail-view-itemdetails .dropdown-menu ul dd {
-    padding: 5px 15px;
+    padding: 0 0 0 15px;
 }
 
 .detail-view-itemdetails .dropdown-menu ul dt a,
@@ -2565,14 +2569,13 @@ span.no-fulltext {
 .detail-view-itemdetails dt,
 .detail-view-itemdetails label dt {
     display: inline;
-    padding-right: 5px;
     font-weight: 300;
 }
 
 .detail-view-itemdetails dd,
 .detail-view-itemdetails label dd {
     font-weight: 700;
-    display: inline;
+    display: block;
 }
 
 .detail-view-itemdetails .dropdown-menu ul dt a,
@@ -2730,7 +2733,7 @@ a#tx-dlf-tools-fulltext:after {
     height: 30px;
     display: inline-block;
     background-size: contain;
-    background-image: url('/typo3conf/ext/si_package/Resources/Public/Icons/ocr-single.svg');
+    background-image: url('/typo3conf/ext/kitodo_presentation_template/Resources/Public/Icons/ocr-single.svg');
 }
 
 
